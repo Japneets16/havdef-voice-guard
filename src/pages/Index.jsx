@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AudioUpload } from '@/components/AudioUpload';
+import { AudioRecorder } from '@/components/AudioRecorder';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { ResultDisplay } from '@/components/ResultDisplay';
 import { DetectionLog } from '@/components/DetectionLog';
@@ -10,7 +10,7 @@ import { Shield, Waves, Upload, Github, Linkedin, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [recordedAudio, setRecordedAudio] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [confidence, setConfidence] = useState(undefined);
@@ -19,10 +19,10 @@ const Index = () => {
   const { toast } = useToast();
 
   const handleAnalyze = async () => {
-    if (!selectedFile) {
+    if (!recordedAudio) {
       toast({
-        title: "No file selected",
-        description: "Please upload an audio file first.",
+        title: "No audio recorded",
+        description: "Please record audio first.",
         variant: "destructive",
       });
       return;
@@ -46,7 +46,7 @@ const Index = () => {
       // Add to history
       const newEntry = {
         id: Date.now().toString(),
-        filename: selectedFile.name,
+        filename: 'Recorded Audio',
         result: mockResult,
         confidence: mockConfidence,
         timestamp: new Date()
@@ -62,7 +62,7 @@ const Index = () => {
       setError("Failed to analyze audio. Please try again.");
       toast({
         title: "Analysis failed",
-        description: "An error occurred while processing your audio file.",
+        description: "An error occurred while processing your audio recording.",
         variant: "destructive",
       });
     } finally {
@@ -71,7 +71,7 @@ const Index = () => {
   };
 
   const handleReset = () => {
-    setSelectedFile(null);
+    setRecordedAudio(null);
     setResult(null);
     setConfidence(undefined);
     setError(undefined);
@@ -110,24 +110,24 @@ const Index = () => {
             <div className="flex items-center justify-center gap-3 mb-4">
               <Upload className="w-6 h-6 text-primary" />
               <p className="text-xl font-semibold text-center">
-                Upload your audio file to check if it's AI-generated
+                Record your audio live to check if it's AI-generated
               </p>
             </div>
           </Card>
         </section>
 
-        {/* Upload Section */}
+        {/* Recording Section */}
         <section className="space-y-6">
           <div className="text-center">
             <h3 className="text-2xl font-semibold mb-2">Audio Analysis</h3>
             <p className="text-muted-foreground">
-              Upload a .wav or .mp3 file to detect if it contains AI-generated voice
+              Record audio live to detect if it contains AI-generated voice
             </p>
           </div>
 
-          <AudioUpload
-            onFileSelect={setSelectedFile}
-            selectedFile={selectedFile}
+          <AudioRecorder
+            onRecordingComplete={setRecordedAudio}
+            recordedAudio={recordedAudio}
             isLoading={isLoading}
           />
 
@@ -135,7 +135,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               onClick={handleAnalyze}
-              disabled={!selectedFile || isLoading}
+              disabled={!recordedAudio || isLoading}
               className="px-8 py-3 text-lg font-medium w-full sm:w-auto hover:scale-105 transition-transform duration-200"
               size="lg"
             >
@@ -143,7 +143,7 @@ const Index = () => {
               {isLoading ? 'Analyzing...' : 'Analyze Audio'}
             </Button>
             
-            {(selectedFile || result) && !isLoading && (
+            {(recordedAudio || result) && !isLoading && (
               <Button
                 onClick={handleReset}
                 variant="outline"
