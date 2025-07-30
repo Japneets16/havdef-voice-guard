@@ -6,7 +6,7 @@ import { DetectionLog } from '@/components/DetectionLog';
 import { AboutSection } from '@/components/AboutSection';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Shield, Waves } from 'lucide-react';
+import { Shield, Waves, Upload, Github, Linkedin, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface DetectionEntry {
@@ -88,16 +88,15 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white border-b shadow-sm">
+      <header className="bg-background/80 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20">
               <Shield className="w-8 h-8 text-primary" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">HAVDEF</h1>
-              <p className="text-sm text-muted-foreground">Hindi Audio-Visual Deepfake Defense</p>
-            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              HAVDEF
+            </h1>
           </div>
         </div>
       </header>
@@ -106,23 +105,34 @@ const Index = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
         
         {/* Hero Section */}
-        <section className="text-center space-y-6">
-          <div className="space-y-4">
+        <section className="relative text-center space-y-6 py-12">
+          {/* Background gradient blob */}
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20 rounded-full blur-3xl opacity-50"></div>
+          </div>
+          
+          <div className="space-y-6">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Waves className="w-10 h-10 text-primary" />
-              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              <Waves className="w-12 h-12 text-primary animate-pulse" />
+              <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
                 HAVDEF
               </h2>
             </div>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               A real-time deepfake voice detection system for phone calls in Hinglish (Hindi + English)
+            </p>
+            <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
+              Protect yourself from AI-generated voice scams in real time.
             </p>
           </div>
           
-          <Card className="max-w-2xl mx-auto p-6 bg-gradient-to-br from-accent/30 to-primary/5">
-            <p className="text-lg font-medium text-center">
-              Upload your audio file to check if it's AI-generated
-            </p>
+          <Card className="max-w-2xl mx-auto p-8 bg-gradient-to-br from-accent/40 to-primary/10 border-primary/20 shadow-xl">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Upload className="w-6 h-6 text-primary" />
+              <p className="text-xl font-semibold text-center">
+                Upload your audio file to check if it's AI-generated
+              </p>
+            </div>
           </Card>
         </section>
 
@@ -142,13 +152,14 @@ const Index = () => {
           />
 
           {/* Action Buttons */}
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               onClick={handleAnalyze}
               disabled={!selectedFile || isLoading}
-              className="px-8 py-3 text-lg font-medium"
+              className="px-8 py-3 text-lg font-medium w-full sm:w-auto hover:scale-105 transition-transform duration-200"
               size="lg"
             >
+              <Upload className="w-5 h-5 mr-2" />
               {isLoading ? 'Analyzing...' : 'Analyze Audio'}
             </Button>
             
@@ -157,7 +168,7 @@ const Index = () => {
                 onClick={handleReset}
                 variant="outline"
                 size="lg"
-                className="px-8 py-3"
+                className="px-8 py-3 w-full sm:w-auto hover:scale-105 transition-transform duration-200"
               >
                 Reset
               </Button>
@@ -194,12 +205,45 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-secondary text-secondary-foreground mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <p className="text-sm opacity-80">
-              © 2024 HAVDEF. Protecting against voice-based fraud with AI.
-            </p>
+      <footer className="bg-gradient-to-r from-secondary to-primary text-secondary-foreground mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Logo & Description */}
+            <div className="text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
+                <Shield className="w-6 h-6" />
+                <h3 className="text-xl font-bold">HAVDEF</h3>
+              </div>
+              <p className="text-sm opacity-80">
+                Protecting against voice-based fraud with AI detection technology.
+              </p>
+            </div>
+            
+            {/* Social Links */}
+            <div className="text-center">
+              <h4 className="font-semibold mb-4">Connect</h4>
+              <div className="flex justify-center gap-4">
+                <a href="#" className="hover:scale-110 transition-transform">
+                  <Github className="w-5 h-5" />
+                </a>
+                <a href="#" className="hover:scale-110 transition-transform">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="#" className="hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+            
+            {/* Credits */}
+            <div className="text-center md:text-right">
+              <p className="text-sm opacity-80 mb-2">
+                Built with ❤️ using React + Tailwind
+              </p>
+              <p className="text-xs opacity-60">
+                © 2024 HAVDEF. All rights reserved.
+              </p>
+            </div>
           </div>
         </div>
       </footer>

@@ -42,6 +42,11 @@ All colors MUST be HSL.
     --danger-foreground: 0 0% 100%;
     --danger-light: 0 84% 95%;
 
+    /* Warning orange */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 95%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
