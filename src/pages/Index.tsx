@@ -87,19 +87,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-background/80 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20">
-              <Shield className="w-8 h-8 text-primary" />
-            </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              HAVDEF
-            </h1>
-          </div>
-        </div>
-      </header>
+
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
@@ -113,13 +101,13 @@ const Index = () => {
           
           <div className="space-y-6">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Waves className="w-12 h-12 text-primary animate-pulse" />
+              <Shield className="w-12 h-12 text-primary animate-pulse" />
               <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
                 HAVDEF
               </h2>
             </div>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              A real-time deepfake voice detection system for phone calls in Hinglish (Hindi + English)
+              AI against AI — real-time detection of synthetic Hinglish voices
             </p>
             <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
               Protect yourself from AI-generated voice scams in real time.
