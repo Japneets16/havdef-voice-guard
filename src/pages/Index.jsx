@@ -9,21 +9,13 @@ import { Card } from '@/components/ui/card';
 import { Shield, Waves, Upload, Github, Linkedin, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-interface DetectionEntry {
-  id: string;
-  filename: string;
-  result: 'human' | 'ai';
-  confidence: number;
-  timestamp: Date;
-}
-
 const Index = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<'human' | 'ai' | null>(null);
-  const [confidence, setConfidence] = useState<number | undefined>(undefined);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [detectionHistory, setDetectionHistory] = useState<DetectionEntry[]>([]);
+  const [result, setResult] = useState(null);
+  const [confidence, setConfidence] = useState(undefined);
+  const [error, setError] = useState(undefined);
+  const [detectionHistory, setDetectionHistory] = useState([]);
   const { toast } = useToast();
 
   const handleAnalyze = async () => {
@@ -52,7 +44,7 @@ const Index = () => {
       setConfidence(mockConfidence);
 
       // Add to history
-      const newEntry: DetectionEntry = {
+      const newEntry = {
         id: Date.now().toString(),
         filename: selectedFile.name,
         result: mockResult,
@@ -87,7 +79,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50">
-
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
