@@ -86,7 +86,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-accent/20 via-primary/10 to-secondary/15">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50">
 
 
       {/* Main Content */}
